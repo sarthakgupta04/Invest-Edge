@@ -56,4 +56,12 @@ def create_app():
 
         return jsonify({'message': 'User registered successfully'}), 201
 
+    @app.errorhandler(404)
+    def resource_not_found(e):
+        return jsonify(error=str(e)), 404
+
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        return jsonify(error="An unexpected error occurred"), 500
+
     return app
