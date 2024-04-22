@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_cors import CORS
 from .auth import auth as auth_blueprint
+from .portfolio import portfolio_bp
 from .database import db
 from .models import User
 import os  # For environment variables
@@ -28,6 +29,7 @@ def create_app():
         return User.query.get(int(user_id))
 
     app.register_blueprint(auth_blueprint, url_prefix='/app/auth')  # Ensure correct blueprint prefix
+    app.register_blueprint(portfolio_bp, url_prefix='/app/portfolio')
 
     @app.route('/')
     def home():
